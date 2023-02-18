@@ -1,9 +1,13 @@
 local testfeature = {}
 
-testfeature.register_me = function(instance)
-    local window = instance.loadModuleScript('Window')
-    local feature = instance.loadModuleScript('Feature')
-    local checkbox = instance.loadModuleScript('Settings/Checkbox')
+function loadModuleScript(script)
+    return loadstring(game:HttpGetAsync('https://raw.githubusercontent.com/TheXSVV/HUB/main/' .. script .. '.lua'))()
+end
+
+testfeature.register_me = function()
+    local window = loadModuleScript('Window')
+    local feature = loadModuleScript('Feature')
+    local checkbox = loadModuleScript('Settings/Checkbox')
 
     local testFeature = feature:new('Test feature')
     testFeature:add_setting(checkbox:new('Test checkbox', true))
