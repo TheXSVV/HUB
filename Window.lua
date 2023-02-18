@@ -155,5 +155,5 @@ mouse.Move:Connect(function()
 end)
 -- Drag end
 
-ClickGUI.Enabled = true
-MainFrame.Visible = true
+ClickGUI.Enabled = false
+MainFrame.Visible = false
