@@ -12,3 +12,5 @@ testFeature:add_setting(checkbox:new('Test checkbox 2', false))
 window.register_feature(testFeature)
 
 window.register_feature(feature:new('Empty feature'))
+
+return {}
