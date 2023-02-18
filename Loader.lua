@@ -3,4 +3,4 @@ function loadModuleScript(script)
 end
 
 loadModuleScript('Window').show()
-loadModuleScript('Features/TestFeature')
+loadModuleScript('Features/TestFeature').register_me(self)
