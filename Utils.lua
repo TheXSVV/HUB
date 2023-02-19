@@ -48,8 +48,4 @@ utils.string_width = function(text, font, size)
 	return textService:GetTextSize(text, size, font, Vector2.new(math.huge, math.huge)).X / 190
 end
 
-utils.loadModuleScript = function(script)
-	return loadstring(game:HttpGetAsync('https://raw.githubusercontent.com/TheXSVV/HUB/main/' .. script .. '.lua'))()
-end
-
 return utils
