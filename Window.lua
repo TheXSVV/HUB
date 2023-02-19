@@ -380,6 +380,7 @@ function change_tab(feature, tab)
                 xOffset = xOffset+0.9
                 elementOffset = 0.02159
             end
+        end
 	end
 end
 
