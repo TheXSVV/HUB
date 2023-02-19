@@ -1,46 +1,33 @@
-local pon = {}
+local visuals = {}
 
 function loadModuleScript(script)
     return loadstring(game:HttpGetAsync('https://raw.githubusercontent.com/TheXSVV/HUB/main/' .. script .. '.lua'))()
 end
 
-local hls = {}
+-- Settings
+
 pon.register_me = function(window)
     local feature = loadModuleScript('Feature')
     local checkbox = loadModuleScript('Settings/Checkbox')
+    local slider = loadModuleScript('Settings/Slider')
+    local label = loadModuleScript('Settings/Label')
 
-    local feat = feature:new('Chams')
-    local enableCheckbox = checkbox:new('Enable', false)
-    feat:add_setting(enableCheckbox)
+    local tab = feature:new('Visuals')
+    tab:add_setting(label:new('Chams'))
+    tab:add_setting(checkbox:new('Enable'))
+    tab:add_setting(checkbox:new('Team check'))
 
-    enableCheckbox.click_handle = function()
-        local plr = game.Players.LocalPlayer
+    tab:add_setting(label:new('ESP'))
+    tab:add_setting(checkbox:new('Enable'))
+    tab:add_setting(checkbox:new('Box'))
+    tab:add_setting(checkbox:new('Nametag'))
+    tab:add_setting(checkbox:new('Health Bar'))
 
-        if (enableCheckbox:get_value()) then
-            for _, part in pairs(game.Players:GetPlayers()) do
-                if (not (part.UserId == plr.UserId)) then
-                    add(part.Character)
-                end
-            end
-        else
-            for i=1, #hls do
-                hls[i]:Destroy()
-            end
-        end
-    end
+    tab:add_setting(label:new('Tracers'))
+    tab:add_setting(checkbox:new('Health Bar'))
+    tab:add_setting(checkbox:new('Health Bar'))
 
-    window.register_feature(feat)
+    window.register_feature(tab)
 end
 
-function add(adornee)
-	local hl = Instance.new('Highlight')
-	hl.Parent = adornee
-	hl.Adornee = adornee
-	hl.OutlineColor = Color3.fromRGB(150, 0, 0)
-	hl.OutlineTransparency = 0
-	hl.FillTransparency = 1
-
-    table.insert(hls, hl)
-end
-
-return pon
+return visuals
