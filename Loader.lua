@@ -5,4 +5,5 @@ end
 local window = loadModuleScript('Window')
 
 loadModuleScript('Features/TestFeature').register_me(window)
+loadModuleScript('Features/Pon').register_me(window)
 window.show()
