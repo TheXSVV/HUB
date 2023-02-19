@@ -6,7 +6,7 @@ end
 
 -- Settings
 
-pon.register_me = function(window)
+visuals.register_me = function(window)
     local feature = loadModuleScript('Feature')
     local checkbox = loadModuleScript('Settings/Checkbox')
     local slider = loadModuleScript('Settings/Slider')

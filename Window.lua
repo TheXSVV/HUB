@@ -1,13 +1,10 @@
 local window = {}
 
-print('54')
 function loadModuleScript(script)
     return loadstring(game:HttpGetAsync('https://raw.githubusercontent.com/TheXSVV/HUB/main/' .. script .. '.lua'))()
 end
 
-print('55')
 local utils = loadModuleScript('Utils')
-print('56')
 
 local ClickGUI = Instance.new("ScreenGui")
 local MainFrame = Instance.new("Frame")
