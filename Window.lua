@@ -14,6 +14,7 @@ local TabsLabel = Instance.new("TextLabel")
 local SettingsPanel = Instance.new("Frame")
 
 local Profile = Instance.new("Frame")
+local UIStroke = Instance.new("UIStroke")
 local Avatar = Instance.new("ImageLabel")
 local UICorner = Instance.new("UICorner")
 local TextLabel = Instance.new("TextLabel")
@@ -81,6 +82,12 @@ Profile.BorderSizePixel = 0
 Profile.Position = UDim2.new(0, 0, 0.833887041, 0)
 Profile.Size = UDim2.new(0, 150, 0, 50)
 
+UIStroke.Parent = Profile
+UIStroke.Color = Color3.fromRGB(71, 71, 71)
+UIStroke.LineJoinMode = Enum.LineJoinMode.Miter
+UIStroke.Thickness = 0.5
+UIStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Contextual
+
 Avatar.Name = "Avatar"
 Avatar.Parent = Profile
 Avatar.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -111,7 +118,8 @@ TextLabel_2.BorderSizePixel = 0
 TextLabel_2.Position = UDim2.new(0.379999995, 0, 0.400000006, 0)
 TextLabel_2.Size = UDim2.new(0, 78, 0, 20)
 TextLabel_2.Font = Enum.Font.FredokaOne
-TextLabel_2.Text = '#' .. tostring(game.Players.LocalPlayer.UserId):sub(0, 4)
+--TextLabel_2.Text = '#' .. tostring(game.Players.LocalPlayer.UserId):sub(0, 4)
+TextLabel_2.Text = 'Build: 19.02'
 TextLabel_2.TextColor3 = Color3.fromRGB(171, 171, 171)
 TextLabel_2.TextSize = 16.000
 TextLabel_2.TextXAlignment = Enum.TextXAlignment.Left
@@ -373,7 +381,7 @@ function change_tab(feature, tab)
                 end)
                 .process()
 
-            if (i == 8) then
+            if (i == 9) then
                 xOffset = xOffset+0.9
                 elementOffset = 0.02159
             end
