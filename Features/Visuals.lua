@@ -54,11 +54,22 @@ chams.click_handle = function()
 	end
 end
 
+function addToChams(player)
+	local hl = Instance.new('Highlight')
+	hl.Parent = player
+	hl.Adornee = player
+	hl.OutlineColor = Color3.fromRGB(150, 0, 0)
+	hl.OutlineTransparency = 0
+	hl.FillTransparency = 1
+	
+	table.insert(chamsHighlights, hl)
+end
+
 esp.click_handle = function()
 	if (esp:get_value()) then
 		for _, player in pairs(game.Players:GetPlayers()) do
 			if (true) then
-				if (espTeamCheck:get_value() and player.Team ~= nil and game.Players.LocalPlayer.Team ~= nil and player.Team.Name ~= game.Players.LocalPlayer.Team) then continue end
+				if (espTeamCheck:get_value() and player.Team ~= nil and game.Players.LocalPlayer.Team ~= nil and player.Team.Name ~= game.Players.LocalPlayer.Team.Name) then continue end
 				
 				addToEsp(player)
 				game.Players.PlayerAdded:Connect(function(player)
@@ -78,20 +89,10 @@ function reloadEsp()
 	esp.click_handle()
 end
 
+espTeamCheck.click_handle = reloadEsp
 box.click_handle = reloadEsp
 nametag.click_handle = reloadEsp
 healthBar.click_handle = reloadEsp
-
-function addToChams(player)
-	local hl = Instance.new('Highlight')
-	hl.Parent = player
-	hl.Adornee = player
-	hl.OutlineColor = Color3.fromRGB(150, 0, 0)
-	hl.OutlineTransparency = 0
-	hl.FillTransparency = 1
-	
-	table.insert(chamsHighlights, hl)
-end
 
 function addToEsp(player)
 	local bbgui = Instance.new('BillboardGui')
