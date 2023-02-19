@@ -1,5 +1,7 @@
 local utils = {}
 
+local textService = game:GetService('TextService')
+
 utils.lerp = function(current, target, speed)
 	local larger = target > current
 	
@@ -40,6 +42,10 @@ utils.switch = function(element)
 	end
 
 	return Table
+end
+
+utils.string_width = function(text, font, size)
+	return textService:GetTextSize(text, size, font, Vector2.new(math.huge, math.huge)).X / 190
 end
 
 return utils

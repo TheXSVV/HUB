@@ -18,6 +18,7 @@ local SettingsPanel = Instance.new("Frame")
 ClickGUI.Name = "ClickGUI"
 ClickGUI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 ClickGUI.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ClickGUI.AutoLocalize = false
 
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = ClickGUI
@@ -141,7 +142,7 @@ window.register_feature = function(feature)
 	tabOffset = tabOffset+tabHeight
 	table.insert(tabs, Tab)
 	
-	if (#tabs == 0) then
+	if (#tabs == 1) then
 		change_tab(feature, Tab)
 	end
 end
@@ -157,50 +158,54 @@ function change_tab(feature, tab)
 	end
 	elements = {}
 	
-	local elementOffset = 0
+	local elementOffset = 0.02159
 	local settings = feature:get_settings()
 	for i=1, #settings do
 		local setting = settings[i]
+		local text = setting:get_title()..':'
+		
+		local Setting = Instance.new("Frame")
+		local SettingTitle = Instance.new("TextLabel")
+		Setting.Name = "Setting"
+		Setting.Parent = SettingsPanel
+		Setting.BackgroundColor3 = Color3.new(1, 1, 1)
+		Setting.BackgroundTransparency = 1
+		Setting.BorderSizePixel = 0
+		Setting.Position = UDim2.new(-0.00233100238, 0, 0, 0)
+		Setting.Size = UDim2.new(0, 224, 0, 54)
+
+		SettingTitle.Name = "SettingTitle"
+		SettingTitle.Parent = Setting
+		SettingTitle.BackgroundColor3 = Color3.new(1, 1, 1)
+		SettingTitle.BackgroundTransparency = 1
+		SettingTitle.BorderSizePixel = 0
+		SettingTitle.Position = UDim2.new(0.0572, 0, elementOffset, 0)
+		SettingTitle.Size = UDim2.new(0, 800, 0, 50)
+		SettingTitle.Font = Enum.Font.SourceSans
+		SettingTitle.Text = text
+		SettingTitle.TextColor3 = Color3.new(1, 1, 1)
+		SettingTitle.TextSize = 14
+		SettingTitle.TextXAlignment = Enum.TextXAlignment.Left
+		table.insert(elements, Setting)
+		table.insert(elements, SettingTitle)
+
 		utils.switch(settings[i]:get_type())
 			.case('checkbox', function()
-				local Setting = Instance.new("Frame")
-				local SettingTitle = Instance.new("TextLabel")
 				local CheckBox = Instance.new("Frame")
 				local CheckmarkIcon = Instance.new("ImageLabel")
-				
-				Setting.Name = "Setting"
-				Setting.Parent = SettingsPanel
-				Setting.BackgroundColor3 = Color3.new(1, 1, 1)
-				Setting.BackgroundTransparency = 1
-				Setting.BorderSizePixel = 0
-				Setting.Position = UDim2.new(-0.00233100238, 0, 0, 0)
-				Setting.Size = UDim2.new(0, 224, 0, 54)
-
-				SettingTitle.Name = "SettingTitle"
-				SettingTitle.Parent = Setting
-				SettingTitle.BackgroundColor3 = Color3.new(1, 1, 1)
-				SettingTitle.BackgroundTransparency = 1
-				SettingTitle.BorderSizePixel = 0
-				SettingTitle.Position = UDim2.new(0.0572088622, 0, 0.0215904787, 0)
-				SettingTitle.Size = UDim2.new(0, 200, 0, 50)
-				SettingTitle.Font = Enum.Font.SourceSans
-				SettingTitle.Text = "ESP:"
-				SettingTitle.TextColor3 = Color3.new(1, 1, 1)
-				SettingTitle.TextSize = 14
-				SettingTitle.TextXAlignment = Enum.TextXAlignment.Left
 
 				CheckBox.Name = "CheckBox"
 				CheckBox.Parent = Setting
 				CheckBox.BackgroundColor3 = Color3.new(0.235294, 0.341176, 0.847059)
 				CheckBox.BorderColor3 = Color3.new(0.568627, 0.647059, 1)
-				CheckBox.Position = UDim2.new(0.201793715, 0, 0.333333343, 0)
+				CheckBox.Position = UDim2.fromScale(SettingTitle.Position.X.Scale+utils.string_width(text, SettingTitle.Font, SettingTitle.TextSize), elementOffset+0.3)
 				CheckBox.Size = UDim2.new(0, 18, 0, 18)
 
 				CheckmarkIcon.Name = "CheckmarkIcon"
 				CheckmarkIcon.Parent = CheckBox
 				CheckmarkIcon.BackgroundColor3 = Color3.new(1, 1, 1)
 				CheckmarkIcon.BackgroundTransparency = 1
-				CheckmarkIcon.Position = UDim2.new(0, 0, -0.0299999993, 0)
+				CheckmarkIcon.Position = UDim2.new(0, 0, -0.028, 0)
 				CheckmarkIcon.Size = UDim2.new(0, 18, 0, 18)
 				CheckmarkIcon.Image = "rbxassetid://1202200114"
 				CheckBox.InputBegan:Connect(function(input)
@@ -214,14 +219,79 @@ function change_tab(feature, tab)
 						end
 					end
 				end)
+				CheckmarkIcon.Visible = setting:get_value()
 
-				table.insert(elements, Setting)
-				table.insert(elements, SettingTitle)
 				table.insert(elements, CheckBox)
 				table.insert(elements, CheckmarkIcon)
+				
+				elementOffset = elementOffset+0.54
 			end)
 			.case('slider', function()
-				print('it is slider')
+				local sliderText
+				if (math.floor(setting:get_value()) == setting:get_value()) then
+					sliderText = tostring(math.round(setting:get_value()))
+				else
+					sliderText = string.format('%.1f', setting:get_value())
+				end
+				
+				local Slider = Instance.new("Frame")
+				local UICorner = Instance.new("UICorner")
+				local TextLabel = Instance.new("TextLabel")
+				local Circle = Instance.new("Frame")
+				local UICorner_2 = Instance.new("UICorner")
+				
+				Slider.Name = "Slider"
+				Slider.Parent = Setting
+				Slider.BackgroundColor3 = Color3.new(0.235294, 0.341176, 0.847059)
+				Slider.Position = UDim2.new(0.0535714291, 0, elementOffset+0.65, 0)
+				Slider.Size = UDim2.new(0, 150, 0, 5)
+
+				UICorner.Parent = Slider
+				UICorner.CornerRadius = UDim.new(0, 14)
+
+				TextLabel.Parent = Slider
+				TextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
+				TextLabel.BackgroundTransparency = 1
+				TextLabel.Position = UDim2.new(1.05299997, 0, -1, 0)
+				TextLabel.Size = UDim2.new(0, 24, 0, 13)
+				TextLabel.Font = Enum.Font.SourceSans
+				TextLabel.Text = sliderText
+				TextLabel.TextColor3 = Color3.new(1, 1, 1)
+				TextLabel.TextSize = 14
+
+				Circle.Name = "Circle"
+				Circle.Parent = Slider
+				Circle.BackgroundColor3 = Color3.new(1, 1, 1)
+				Circle.Position = UDim2.new(setting:calc_slider_circle(), 0, -0.400000393, 0)
+				
+				Circle.Size = UDim2.new(0, 9, 0, 9)
+
+				UICorner_2.Parent = Circle
+				UICorner_2.CornerRadius = UDim.new(0, 16)
+				Slider.InputBegan:Connect(function(input)
+					if (input.UserInputType == Enum.UserInputType.MouseButton1) then
+						setting.sliding = true
+						drag = false
+					end
+				end)
+				Slider.InputEnded:Connect(function(input)
+					if (input.UserInputType == Enum.UserInputType.MouseButton1) then
+						setting.sliding = false
+					end
+				end)
+				mouse.Move:Connect(function()
+					if (setting.sliding) then
+						setting:set_value((mouse.X - Slider.AbsolutePosition.X) * (setting:get_max() - setting:get_min()) / Slider.AbsoluteSize.X + setting:get_min())
+						Circle.Position = UDim2.new(setting:calc_slider_circle(), 0, -0.400000393, 0)	
+						drag = false
+					end
+				end)
+				
+				table.insert(elements, Slider)
+				table.insert(elements, TextLabel)
+				table.insert(elements, Circle)
+
+				elementOffset = elementOffset+0.54
 			end)
 			.process()
 	end
