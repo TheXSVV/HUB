@@ -101,6 +101,7 @@ local tabs = {}
 local tabHeight = 0.095
 local tabOffset = 0.332225
 window.register_feature = function(feature)
+    print('222')
 	local Tab = Instance.new("Frame")
 	local LeftAscent = Instance.new("Frame")
 	local Label = Instance.new("TextLabel")
