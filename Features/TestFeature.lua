@@ -7,6 +7,7 @@ end
 testfeature.register_me = function(window)
     local feature = loadModuleScript('Feature')
     local checkbox = loadModuleScript('Settings/Checkbox')
+    local slider = loadModuleScript('Settings/Slider')
 
     local testFeature = feature:new('Test feature')
     testFeature:add_setting(checkbox:new('Test checkbox', true))
