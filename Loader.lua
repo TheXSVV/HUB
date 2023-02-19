@@ -7,4 +7,5 @@ local window = loadModuleScript('Window')
 
 utils.loadModuleScript('Features/TestFeature').register_me(window)
 utils.loadModuleScript('Features/Pon').register_me(window)
-window.show(utils)
+window.setup(utils)
+window.show()
