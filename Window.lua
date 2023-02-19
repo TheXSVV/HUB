@@ -217,6 +217,10 @@ function change_tab(feature, tab)
 							CheckmarkIcon.Visible = true
 							setting:set_value(true)
 						end
+
+                        if (setting.click_handle) then
+							setting.click_handle()
+						end
 					end
 				end)
 				CheckmarkIcon.Visible = setting:get_value()
@@ -282,7 +286,13 @@ function change_tab(feature, tab)
 				mouse.Move:Connect(function()
 					if (setting.sliding) then
 						setting:set_value((mouse.X - Slider.AbsolutePosition.X) * (setting:get_max() - setting:get_min()) / Slider.AbsoluteSize.X + setting:get_min())
-						Circle.Position = UDim2.new(setting:calc_slider_circle(), 0, -0.400000393, 0)	
+						Circle.Position = UDim2.new(setting:calc_slider_circle(), 0, -0.400000393, 0)
+                        if (math.floor(setting:get_value()) == setting:get_value()) then
+                            sliderText = tostring(math.round(setting:get_value()))
+                        else
+                            sliderText = string.format('%.1f', setting:get_value())
+                        end
+                        TextLabel.Text = sliderText
 						drag = false
 					end
 				end)
