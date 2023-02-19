@@ -1,5 +1,6 @@
 local window = {}
 
+print('54')
 function loadModuleScript(script)
     return loadstring(game:HttpGetAsync('https://raw.githubusercontent.com/TheXSVV/HUB/main/' .. script .. '.lua'))()
 end
