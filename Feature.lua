@@ -16,6 +16,12 @@ function feature:new(title)
 	function properties:add_setting(setting)
 		table.insert(self.settings, setting)
 	end
+
+	function properties:add_settings(settingArray)
+		for i=1, #settingArray do
+			table.insert(self.settings, settingArray[i])
+		end
+	end
 	
 	setmetatable(properties, self)
 	self.__index = self; return properties
