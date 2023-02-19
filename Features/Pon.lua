@@ -12,7 +12,6 @@ pon.register_me = function(window)
     local feat = feature:new('Chams')
     local enableCheckbox = checkbox:new('Enable', true)
     feat:add_setting(enableCheckbox)
-    window.register_feature(feat)
 
     enableCheckbox.click_handle = function()
         local plr = game.Players.LocalPlayer
@@ -31,6 +30,8 @@ pon.register_me = function(window)
             end
         end
     end
+
+    window.register_feature(feat)
 end
 
 return pon
