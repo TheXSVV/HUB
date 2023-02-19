@@ -4,8 +4,7 @@ function loadModuleScript(script)
     return loadstring(game:HttpGetAsync('https://raw.githubusercontent.com/TheXSVV/HUB/main/' .. script .. '.lua'))()
 end
 
-testfeature.register_me = function()
-    local window = loadModuleScript('Window')
+testfeature.register_me = function(window)
     local feature = loadModuleScript('Feature')
     local checkbox = loadModuleScript('Settings/Checkbox')
 
