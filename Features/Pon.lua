@@ -10,7 +10,7 @@ pon.register_me = function(window)
     local checkbox = loadModuleScript('Settings/Checkbox')
 
     local feat = feature:new('Chams')
-    local enableCheckbox = checkbox:new('Enable', true)
+    local enableCheckbox = checkbox:new('Enable', false)
     feat:add_setting(enableCheckbox)
 
     enableCheckbox.click_handle = function()
