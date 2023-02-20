@@ -37,7 +37,7 @@ chams.click_handle = function()
 	if (chams:get_value()) then
 		for _, player in pairs(game.Players:GetPlayers()) do
 			if (player.UserId ~= game.Players.LocalPlayer.UserId) then
-				if (chamsTeamCheck:get_value() and player.Team ~= nil and game.Players.LocalPlayer.Team ~= nil and player.Team.Name ~= game.Players.LocalPlayer.Team) then continue end
+				if (chamsTeamCheck:get_value() and player.Team ~= nil and game.Players.LocalPlayer.Team ~= nil and player.Team.Name ~= game.Players.LocalPlayer.Team.Name) then continue end
 
 				addToChams(player.Character)
 				game.Players.PlayerAdded:Connect(function(player)
@@ -71,9 +71,15 @@ end
 esp.click_handle = function()
 	if (esp:get_value()) then
 		for _, player in pairs(game.Players:GetPlayers()) do
-			if (true) then
+			if (player.UserId ~= game.Players.LocalPlayer.UserId) then
 				if (espTeamCheck:get_value() and player.Team ~= nil and game.Players.LocalPlayer.Team ~= nil and player.Team.Name ~= game.Players.LocalPlayer.Team.Name) then continue end
 				
+				if (player.Team ~= nil) then
+					print(player.Team.Name)
+				end
+				if (game.Players.LocalPlayer.Team ~= nil) then
+					print(game.Players.LocalPlayer.Team.Name)
+				end
 				addToEsp(player)
 				game.Players.PlayerAdded:Connect(function(player)
 					if (esp:get_value()) then
@@ -150,6 +156,9 @@ function addToEsp(player)
 		nametagLabel.TextSize = 16
 		nametagLabel.Text = player.Name
 		nametagLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+		if (player.Team ~= nil) then
+			nametagLabel.TextColor3 = player.TeamColor.Color
+		end
 		nametagLabel.TextStrokeTransparency = 0.5
 		nametagLabel.BackgroundTransparency = 1
 		nametagLabel.Font = Enum.Font.Roboto
