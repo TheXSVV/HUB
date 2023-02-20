@@ -4,6 +4,7 @@ function loadModuleScript(script)
     return loadstring(game:HttpGetAsync('https://raw.githubusercontent.com/TheXSVV/HUB/main/' .. script .. '.lua'))()
 end
 
+local utils = loadModuleScript('Utils')
 local feature = loadModuleScript('Feature')
 local checkbox = loadModuleScript('Settings/Checkbox')
 local slider = loadModuleScript('Settings/Slider')
@@ -47,10 +48,7 @@ chams.click_handle = function()
 			end
 		end
 	else
-		for i=1, #chamsHighlights do
-			chamsHighlights[i]:Destroy()
-		end
-		chamsHighlights = {}
+		clearChams()
 	end
 end
 
@@ -63,6 +61,11 @@ function addToChams(player)
 	hl.FillTransparency = 1
 	
 	table.insert(chamsHighlights, hl)
+end
+
+function reloadChams()
+	clearEsp()
+	chams.click_handle()
 end
 
 esp.click_handle = function()
@@ -212,6 +215,13 @@ function clearEsp()
 		espBillboards[i]:Destroy()
 	end
 	espBillboards = {}
+end
+
+function clearChams()
+	for i=1, #chamsHighlights do
+		chamsHighlights[i]:Destroy()
+	end
+	chamsHighlights = {}
 end
 
 return visuals

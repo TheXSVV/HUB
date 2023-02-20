@@ -37,7 +37,7 @@ watermark.click_handle = function()
         local TextLabel_2 = Instance.new("TextLabel")
 
         Watermark.Name = "Watermark"
-        Watermark.Parent = HUD
+        Watermark.Parent = screenGUI
         Watermark.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
         Watermark.BackgroundTransparency = 0.400
         Watermark.BorderColor3 = Color3.fromRGB(27, 42, 53)
