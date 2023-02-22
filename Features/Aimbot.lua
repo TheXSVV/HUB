@@ -9,6 +9,7 @@ local checkbox = loadModuleScript('Settings/Checkbox')
 local slider = loadModuleScript('Settings/Slider')
 local label = loadModuleScript('Settings/Label')
 
+local tab = feature:new('Aimbot')
 -- Settings
 local lbl1 = label:new('Aimbot')
 local aimbot = checkbox:new('Enable', false)
