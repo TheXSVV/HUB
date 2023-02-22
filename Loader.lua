@@ -6,4 +6,5 @@ local window = loadModuleScript('Window')
 
 loadModuleScript('Features/Visuals').register_me(window)
 loadModuleScript('Features/HUD').register_me(window)
+loadModuleScript('Features/Aimbot').register_me(window)
 window.show()
