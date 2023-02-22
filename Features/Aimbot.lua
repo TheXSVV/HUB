@@ -43,7 +43,7 @@ game:GetService('RunService').RenderStepped:Connect(function()
 	end
 	if (target == nil or not hold) then return end
 	
-	game.Workspace.CurrentCamera.CFrame = CFrame.new(game.Workspace.CurrentCamera.CFrame.Position, target.Head.Position)
+	game.Workspace.CurrentCamera.CFrame = CFrame.new(game.Workspace.CurrentCamera.CFrame.Position, target.Character.UpperTorso.Position)
 end)
 
 function isValid(player)
@@ -53,11 +53,21 @@ function isValid(player)
 end
 
 function getTarget()
+	local distance = math.huge
+	local lastTarget = nil
+	
 	for _, player in pairs(game.Players:GetPlayers()) do
 		if (isValid(player)) then
-			return player
+			local dist = (game.Players.LocalPlayer.Character:WaitForChild('HumanoidRootPart').Position - player.Character:WaitForChild('HumanoidRootPart').Position).magnitude
+			
+			if (dist < distance) then
+				distance = dist
+				lastTarget = player
+			end
 		end
 	end
+	
+	return lastTarget
 end
 
 return aimbot
