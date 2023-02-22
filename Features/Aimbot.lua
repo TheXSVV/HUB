@@ -55,7 +55,7 @@ end
 function getTarget()
 	for _, player in pairs(game.Players:GetPlayers()) do
 		if (isValid(player)) then
-			target = player
+			return player
 		end
 	end
 end
