@@ -58,7 +58,7 @@ function getTarget()
 	
 	for _, player in pairs(game.Players:GetPlayers()) do
 		if (isValid(player)) then
-			local dist = (game.Players.LocalPlayer.Character:WaitForChild('HumanoidRootPart').Position - player.Character:WaitForChild('HumanoidRootPart').Position).magnitude
+			local dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).magnitude
 			
 			if (dist < distance) then
 				distance = dist
