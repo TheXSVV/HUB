@@ -30,7 +30,8 @@ function slider:new(title, min, max, defaultValue)
 	end
 	
 	function properties:calc_slider_circle()
-		return self.value / max
+		--return self.value / max
+		return (self.value - min) * (1 / (max - min))
 	end
 
 	function properties:set_value(value)
